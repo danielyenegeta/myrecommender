@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Song
 
 # Create your views here.
 
@@ -98,6 +99,11 @@ Q = numpy.random.rand(V,K)
 nP, nQ = matrix_factorization(matrix, P, Q, K)
 nR = numpy.dot(nP, nQ.T)
 
+s = Song(title="As", artist="Stevie Wonder")
+
 
 def index(request):
     return HttpResponse(nR)
+
+def songview(request):
+	return HttpResponse(s.title)
