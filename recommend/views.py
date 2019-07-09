@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import CreateView
 from .models import Song
 
 # Create your views here.
@@ -99,14 +100,23 @@ import numpy
 # nP, nQ = matrix_factorization(matrix, P, Q, K)
 # nR = numpy.dot(nP, nQ.T)
 
-s = Song(title="As", artist="Stevie Wonder")
-
+As = Song(title="As", artist="Stevie Wonder")
+MoReala = Song(title="Mo Reala", artist="Future")
+AutumnLeaves = Song(title="Autumn Leaves", artist="Joseph Kosma")
 
 def index(request):
     return render(request, 'recommend/index.html')
 
 def songview(request):
-	return HttpResponse(s.title)
+	songs = Song.objects.order_by('title')
+	context = {'song_list':songs}
+	return render(request, 'recommend/home.html', context)
 
 def home(request, name):
-	return render(request, 'recommend/home.html', {'user':name})
+	songs = Song.objects.order_by('title')
+	context = {
+	'song_list':songs,
+	'user':name
+	}
+	#return render(request, 'recommend/home.html', context)
+	return HttpResponse(name)

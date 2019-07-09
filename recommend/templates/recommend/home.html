@@ -5,5 +5,14 @@
   </head>
   <body>
     <h1>Hello {{ user }}</h1>
+    {% if song_list %}
+      <ul>
+      {% for song in song_list %}
+        <li>{{song.name}}, {{song.artist}}</li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No songs are available</p>
+    {% endif %}
   </body>
 </html>
