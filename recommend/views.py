@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import CreateView
-from .models import Song
+from .models import Song, CustomUser
 
 # Create your views here.
 
@@ -100,17 +100,18 @@ import numpy
 # nP, nQ = matrix_factorization(matrix, P, Q, K)
 # nR = numpy.dot(nP, nQ.T)
 
-As = Song(title="As", artist="Stevie Wonder")
-MoReala = Song(title="Mo Reala", artist="Future")
-AutumnLeaves = Song(title="Autumn Leaves", artist="Joseph Kosma")
-
 def index(request):
     return render(request, 'recommend/index.html')
 
 def songview(request):
-	songs = Song.objects.order_by('title')
+	songs = Song.objects.all()
 	context = {'song_list':songs}
 	return render(request, 'recommend/home.html', context)
+
+def mysongs(request):
+	foo = CustomUser.objects.get(pk=2).songs.all()
+	context = {'user':foo}
+	return render(request, 'recommend/songs.html', context)
 
 def home(request, name):
 	songs = Song.objects.order_by('title')
@@ -119,4 +120,4 @@ def home(request, name):
 	'user':name
 	}
 	#return render(request, 'recommend/home.html', context)
-	return HttpResponse(name)
+	return HttpResponse(AutumnLeaves.title)

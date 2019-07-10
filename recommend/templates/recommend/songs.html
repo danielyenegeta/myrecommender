@@ -4,10 +4,10 @@
     <title>Piano Song Recommender</title>
   </head>
   <body>
-    <h1>Hello {{ user }}</h1>
-    {% if song_list %}
+    <h1>Hello</h1>
+    {% if user %}
       <ul>
-      {% for song in song_list %}
+      {% for song in user %}
         <li>{{song.title}}, {{song.artist}}, {{song.id}}</li>
       {% endfor %}
       </ul>
