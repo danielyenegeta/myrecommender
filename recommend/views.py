@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import CreateView
-from .models import Song, CustomUser
+from .models import Song, CustomUser, Ratings
 
 # Create your views here.
 
@@ -119,5 +119,4 @@ def home(request, name):
 	'song_list':songs,
 	'user':name
 	}
-	#return render(request, 'recommend/home.html', context)
-	return HttpResponse(AutumnLeaves.title)
+	return render(request, 'recommend/home.html', context)
