@@ -18,5 +18,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('recommend/', include('recommend.urls')),
+    path('recommend/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

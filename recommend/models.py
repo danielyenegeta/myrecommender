@@ -13,6 +13,7 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=30, default="")
     songs = models.ManyToManyField(Song)
     recommends = models.ManyToManyField(Song, related_name='user_recommends', through='Ratings')
+    newsongs = models.ManyToManyField(Song, related_name='newsongs')
     def __str__(self):
         return self.email
 

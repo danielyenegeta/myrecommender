@@ -109,7 +109,7 @@ def songview(request):
 	return render(request, 'recommend/home.html', context)
 
 def mysongs(request):
-	foo = CustomUser.objects.get(pk=2).songs.all()
+	foo = CustomUser.objects.get(pk=1).recommends.all()
 	context = {'user':foo}
 	return render(request, 'recommend/songs.html', context)
 
