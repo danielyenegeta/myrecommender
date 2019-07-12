@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <h2>Your songs</h2>
+  <ul>
+    {% if not songs %}
+      <li>No songs :(</li>
+    {% else %}
+      {% for song in songs %}
+        <li>{{song.title}}, {{song.artist}}</li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+  <h2>Your ratings</h2>
+  <ul>
+    {% if not ratings %}
+      <li>No rated songs :(</li>
+    {% else %}
+      {% for rated in ratings %}
+        <li>{{rated.song.title}}, {{rated.song.artist}}, {{rated.rating}}</li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

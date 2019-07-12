@@ -126,4 +126,5 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'recommend.CustomUser'
 
-LOGIN_REDIRECT_URL = '/recommend/songview/'
+LOGIN_REDIRECT_URL = '/recommend/homepage/'
+LOGOUT_REDIRECT_URL = '/recommend/homepage/'

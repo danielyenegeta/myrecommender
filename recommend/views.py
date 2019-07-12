@@ -120,3 +120,20 @@ def home(request, name):
 	'user':name
 	}
 	return render(request, 'recommend/home.html', context)
+
+def homepage(request):
+	if request.user.is_authenticated:
+		songs = request.user.songs.all()
+		recommends = request.user.recommends.all()
+		ratings = Ratings.objects.filter(person=request.user)
+		dontshow = []
+		for music in songs:
+			dontshow.append(Ratings.objects.filter(person=request.user, song=music))
+		context = {
+		'songs':songs,
+		'recoms':recommends,
+		'ratings':ratings,
+		'dontshow':dontshow
+		}
+		return render(request, 'recommend/homepage.html', context)
+	return render(request, 'recommend/homepage.html')
