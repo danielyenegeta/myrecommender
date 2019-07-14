@@ -35,77 +35,6 @@ def matrix_factorization(R, P, Q, K, alpha=0.0002, beta=0.02, steps=10000):
 		if e < 0.001:
 			break
 	return P, Q.T
-#
-#
-# songs = []
-# songs.append('Power')
-# songs.append('Magic')
-# songs.append('Money Longer')
-# songs.append('R.I.P.')
-# songs.append('Claire de Lune')
-#
-# users = {}
-# users['Future'] = {}
-# users['Kanye'] = {}
-# users['Jay Z'] = {}
-# users['Steve Jobs'] = {}
-# users['Bill Gates'] = {}
-# users['Young Thug'] = {}
-#
-# users['Future'] = {
-#         'Magic': 5,
-#         'Money Longer': 3,
-#         'R.I.P.': 4,
-#         'Claire de Lune': 4.9
-#     }
-# users['Kanye'] = {
-#         'Power': 5,
-#         'Magic': 4.7,
-#         'Money Longer': 1,
-#         'R.I.P.': 5
-#     }
-# users['Jay Z'] = {
-#         'Power': 4.1,
-#         'Magic': 2.1,
-#         'Money Longer': 4.7,
-#         'Claire de Lune': 5
-#     }
-# users['Steve Jobs'] = {
-#     'Power': 1.8,
-#     'Magic': 4.6,
-#     'R.I.P': 4.2,
-#     'Claire de Lune': 5
-#     }
-# users['Bill Gates'] = {
-#         'Magic': 2.1,
-#         'Money Longer': 4.5,
-#         'R.I.P.': 2,
-#         'Claire de Lune': 5
-#     }
-# users['Young Thug'] = {
-#         'Power': 2.3,
-#         'Money Longer': 3.2,
-#         'R.I.P.': 4.2
-#     }
-# songs.sort()
-# matrix=[]
-# for u in users:
-#     ratings=[]
-#     for v in songs:
-#         if v in users[u]:
-#             ratings.append(users[u][v])
-#         else:
-#             ratings.append(0)
-#     matrix.append(ratings)
-# matrix = numpy.array(matrix)
-#
-# U = len(matrix)
-# V = len(matrix[0])
-# K=10
-# P = numpy.random.rand(U,K)
-# Q = numpy.random.rand(V,K)
-# nP, nQ = matrix_factorization(matrix, P, Q, K)
-# nR = numpy.dot(nP, nQ.T)
 
 def homepage(request):
 	if request.user.is_authenticated:
@@ -137,22 +66,6 @@ def homepage(request):
 
 		id = request.user.id
 		for i in range(1, num_songs):
-			# if ratings.filter(song_id=i).exists():
-			# 	if ratings.get(song_id=i).rating <= 2:
-			# 		if in_newsongs:
-			# 			to_remove = request.user.newsongs.get(id=i)
-			# 			request.user.newsongs.remove(to_remove)
-			# 		break
-			# 	elif ratings.get(song_id=i).rating >= 4 and not in_newsongs:
-			# 		request.user.newsongs.add(allsongs.get(id=i))
-			# 		break
-			# if nR[id_index][i-1] >= 4:
-			# 	if not request.user.songs.filter(id=i).exists() and not in_newsongs:
-			# 		request.user.newsongs.add(allsongs.get(id=i))
-			# elif nR[id_index][i-1] < 3:
-			# 	if in_newsongs:
-			# 		to_remove = request.user.newsongs.get(id=i)
-			# 		request.user.newsongs.remove(to_remove)
 			in_songs = request.user.songs.filter(id=i).exists()
 			in_newsongs = request.user.newsongs.filter(id=i).exists()
 			if ratings.filter(song_id=i).exists():
