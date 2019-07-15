@@ -70,15 +70,29 @@ def homepage(request):
 			in_newsongs = request.user.newsongs.filter(id=i).exists()
 			if ratings.filter(song_id=i).exists():
 				user_rating = ratings.get(song_id=i).rating
+			else:
+				user_rating = 0
 
 			if in_newsongs:
-				if user_rating < 4 or in_songs or nR[id-1][i-1] < 3:
+				if (user_rating < 4 and user_rating > 0) or in_songs or nR[id-1][i-1] < 3:
 					to_remove = request.user.newsongs.get(id=i)
 					request.user.newsongs.remove(to_remove)
 					continue
-			elif (user_rating >= 4 or nR[id-1][i-1] >= 4) and not in_songs:
-				request.user.newsongs.add(allsongs.get(id=i))
+			elif not in_songs:
+				if user_rating >= 4 or nR[id-1][i-1] >= 4:
+					request.user.newsongs.add(allsongs.get(id=i))
 
+
+			# else:
+			# 	if user_rating >= 4 and not in_songs:
+			# 		request.user.newsongs.add(allsongs.get(id=i))
+			# 	elif nR[id-1][i-1] >= 4 and not in_songs:
+			# 		request.user.newsongs.add(allsongs.get(id=i))
+
+
+			# elif (user_rating >= 4 or nR[id-1][i-1] >= 4) and not in_songs:
+			# 	request.user.newsongs.add(allsongs.get(id=i))
+			# 	continue
 
 		recommended = request.user.newsongs.all().order_by('title')
 

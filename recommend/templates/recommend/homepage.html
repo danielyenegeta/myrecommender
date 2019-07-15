@@ -15,6 +15,7 @@
       {% endfor %}
     {% endif %}
   </ul>
+
   <h2>Your ratings</h2>
   <ul>
     {% if not ratings %}
@@ -25,12 +26,6 @@
       {% endfor %}
     {% endif %}
   </ul>
-  {% for row in matrix %}
-    <p>{{row}}</p>
-  {% endfor %}
-  {% for row in newmatrix %}
-    <p>{{row}}</p>
-  {% endfor %}
 
   <h2>Your recommended songs</h2>
   <ul>
@@ -42,6 +37,16 @@
       {% endfor %}
     {% endif %}
   </ul>
+
+
+  {% for row in matrix %}
+    <p>{{row}}</p>
+  {% endfor %}
+  {% for row in newmatrix %}
+    <p>{{row}}</p>
+  {% endfor %}
+
+
 
   <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
