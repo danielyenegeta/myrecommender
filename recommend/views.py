@@ -70,8 +70,6 @@ def homepage(request):
 			in_newsongs = request.user.newsongs.filter(id=i).exists()
 			if ratings.filter(song_id=i).exists():
 				user_rating = ratings.get(song_id=i).rating
-			else:
-				user_rating = 0
 
 			if in_newsongs:
 				if user_rating < 4 or in_songs or nR[id-1][i-1] < 3:
@@ -92,7 +90,8 @@ def homepage(request):
 		'matrix':matrix,
 		'newmatrix':nR
 		}
-	return render(request, 'recommend/homepage.html', context)
+		return render(request, 'recommend/homepage.html', context)
+	return render(request, 'recommend/homepage.html')
 
 def index(request):
     return render(request, 'recommend/index.html')
