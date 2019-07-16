@@ -4,15 +4,12 @@
     <title>Piano Song Recommender</title>
   </head>
   <body>
-    <h1>Hello</h1>
-    {% if user %}
-      <ul>
-      {% for song in user %}
-        <li>{{song.title}}, {{song.artist}}, {{song.id}}</li>
-      {% endfor %}
-      </ul>
+    <h1>Hello {{ user }}</h1>
+    {% if songlist %}
+      {% for song in songlist %}
+        <a href="songview/"
     {% else %}
-      <p>No songs are available</p>
+      <p>Sheet music not available</p>
     {% endif %}
   </body>
 </html>

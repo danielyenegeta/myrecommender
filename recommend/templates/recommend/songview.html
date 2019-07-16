@@ -1,0 +1,16 @@
+{% load static %}
+<html>
+  <head>
+    <title>Piano Song Recommender</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    {% if content %}
+      <a href={{content}}>
+        content
+      </a>
+    {% else %}
+      <p>Sheet music not available</p>
+    {% endif %}
+  </body>
+</html>

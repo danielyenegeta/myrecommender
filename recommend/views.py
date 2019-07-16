@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from .models import Song, CustomUser, Ratings
+from .models import Song, CustomUser, Ratings, Scores
 from .forms import CustomUserCreationForm
+import numpy
 
 # Create your views here.
 
@@ -12,7 +13,6 @@ class signup(CreateView):
 	success_url = reverse_lazy('login')
 	template_name = 'registration/signup.html'
 
-import numpy
 
 def matrix_factorization(R, P, Q, K, alpha=0.0002, beta=0.02, steps=10000):
 	Q = Q.T
@@ -110,14 +110,19 @@ def homepage(request):
 def index(request):
     return render(request, 'recommend/index.html')
 
-def songview(request):
-	songs = Song.objects.all()
-	context = {'song_list':songs}
-	return render(request, 'recommend/home.html', context)
+def songview(request, songnumber):
+	if Scores.objects.filter(song_id=songnumber).exists():
+		sheetmusic = Scores.objects.get(song_id=songnumber).pdf
+		response = HttpResponse(sheetmusic.read(), content_type='application/pdf')
+		response['Content-Disposition'] = 'inline;filename=some_file.pdf'
+		return response
+		sheetmusic.close()
+	else:
+		return render(request, 'recommend/songview.html')
 
-def mysongs(request):
-	foo = CustomUser.objects.get(pk=1).recommends.all()
-	context = {'user':foo}
+def songs(request):
+	songlist = Song.objects.all()
+	context = {'songs':songlist}
 	return render(request, 'recommend/songs.html', context)
 
 def home(request, name):

@@ -21,3 +21,7 @@ class Ratings(models.Model):
     person = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+class Scores(models.Model):
+    song = models.OneToOneField(Song, on_delete=models.CASCADE)
+    pdf = models.FileField(upload_to='sheetmusic', null=True, blank=True)

@@ -128,3 +128,6 @@ AUTH_USER_MODEL = 'recommend.CustomUser'
 
 LOGIN_REDIRECT_URL = '/recommend/homepage/'
 LOGOUT_REDIRECT_URL = '/recommend/homepage/'
+
+MEDIA_URL = '/recommend/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'recommend')
