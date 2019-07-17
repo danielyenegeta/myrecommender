@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .models import Song, CustomUser, Ratings, Scores
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 import numpy
 
 # Create your views here.
@@ -120,15 +121,8 @@ def songview(request, songnumber):
 	else:
 		return render(request, 'recommend/songview.html')
 
+@login_required()
 def songs(request):
-	songlist = Song.objects.all()
+	songlist = Song.objects.all().order_by('title')
 	context = {'songs':songlist}
 	return render(request, 'recommend/songs.html', context)
-
-def home(request, name):
-	songs = Song.objects.order_by('title')
-	context = {
-	'song_list':songs,
-	'user':name
-	}
-	return render(request, 'recommend/home.html', context)
