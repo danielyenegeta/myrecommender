@@ -17,12 +17,16 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include, url
+from django.views.generic.base import TemplateView
+from recommend.views import *
 
 
 urlpatterns = [
-    path('recommend/', include('recommend.urls')),
-    path('recommend/', include('django.contrib.auth.urls')),
+    # path('recommend/', include('recommend.urls')),
+    # path('recommend/', include('django.contrib.auth.urls')),
+    # path('accounts/login/', auth_views.LoginView.as_view()),
+    # path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/login/', auth_views.LoginView.as_view()),
-    url(r'^api-auth/', include('rest_framework.urls')),
+    path('getData/', get_data),
+    path('.*', TemplateView.as_view(template_name="home.html"), name="home")
 ]
