@@ -22,11 +22,12 @@ from recommend.views import *
 
 
 urlpatterns = [
-    # path('recommend/', include('recommend.urls')),
-    # path('recommend/', include('django.contrib.auth.urls')),
-    # path('accounts/login/', auth_views.LoginView.as_view()),
-    # path('api-auth/', include('rest_framework.urls')),
+    path('', include('recommend.urls')),
+    path('recommend/', include('recommend.urls')),
+    path('recommend/', include('django.contrib.auth.urls')),
+    path('', include('frontend.urls')),
+    path('accounts/login/', auth_views.LoginView.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    path('getData/', get_data),
     path('.*', TemplateView.as_view(template_name="home.html"), name="home")
 ]

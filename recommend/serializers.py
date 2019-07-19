@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from .models import Song, CustomUser, Ratings, Scores
+from recommend.models import *
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('title', 'artist')
+        fields = '__all__'
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('name', 'songs', 'recommends', 'newsongs')
+        fields = '__all__'
 
 class RatingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ratings
-        fields = ('person', 'song', 'rating')
+        fields = '__all__'
 
 class ScoresSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scores
-        fields = ('song', 'pdf')
+        fields = '__all__'
