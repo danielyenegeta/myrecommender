@@ -4,7 +4,7 @@ import DataProvider from "./DataProvider";
 import Table from "./Table";
 
 const App = () => (
-  <DataProvider endpoint="myrecommender/recommend/"
+  <DataProvider endpoint="api/song/"
                 render={data => <Table data={data} />} />
 );
 const wrapper = document.getElementById("app");
