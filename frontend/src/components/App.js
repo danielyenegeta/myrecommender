@@ -1,11 +1,38 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import DataProvider from "./DataProvider";
-import Table from "./Table";
+import React, { Component } from 'react';
+import Navbar from './Navbar/Navbar';
+import SideDrawer from './SideDrawer/SideDrawer';
+import Backdrop from './Backdrop/Backdrop'
 
-const App = () => (
-  <DataProvider endpoint="api/song/"
-                render={data => <Table data={data} />} />
-);
-const wrapper = document.getElementById("app");
-wrapper ? ReactDOM.render(<App />, wrapper) : null;
+export default class App extends Component {
+  state = {
+    sideDrawerOpen: false
+  };
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {sideDrawerOpen: !prevState.sideDrawerOpen};
+    });
+  };
+
+  backdropClickHandler = () => {
+    this.setState({sideDrawerOpen: false});
+  };
+
+  render() {
+    let backdrop;
+
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler}/>;
+    }
+    return (
+      <div style={{height: '100%'}}>
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler}/>
+        <SideDrawer show={this.state.sideDrawerOpen} />
+        {backdrop}
+        <main style={{marginTop: '64px'}}>
+          <p>This is the page content</p>
+        </main>
+      </div>
+    );
+  }
+}
