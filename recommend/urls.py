@@ -10,6 +10,7 @@ urlpatterns = [
     path('songview/<int:songnumber>/', views.songview, name='songview'),
     path('songs/', views.songs, name='songs'),
     path('homepage/', views.homepage, name='homepage'),
+    path('home/', views.home, name='home'),
     path('signup/', views.signup.as_view(), name='signup'),
 ]
 # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,20 +1,49 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Django-ng</title>
-  <base href="/">
+{% block title %}Home{% endblock %}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'ang/styles.css' %}"></head>
-<body>
-	<app-root><img src="/static/ang/assets/images/loading/load.gif" alt="Loading..." style="position:fixed; top:50%; left:50%; transform: translate(-50%, -50%);"></app-root>
-	<script type="text/javascript" src="{% static 'ang/runtime.js' %}"></script>
-	<script type="text/javascript" src="{% static 'ang/polyfills.js' %}"></script>
-	<script type="text/javascript" src="{% static 'ang/main.js' %}"></script>
-</body>
-</html>
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <h2>Your songs</h2>
+  <ul>
+    {% if not songs %}
+      <li>No songs :(</li>
+    {% else %}
+      {% for song in songs %}
+        <li>{{song.title}}, {{song.artist}}</li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+  <h2>Your ratings</h2>
+  <ul>
+    {% if not ratings %}
+      <li>No rated songs :(</li>
+    {% else %}
+      {% for rated in ratings %}
+        <li>{{rated.song.title}}, {{rated.song.artist}}, {{rated.rating}}</li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+  <h2>Your recommended songs</h2>
+  <ul>
+    {% if not recoms %}
+      <li>No songs :(</li>
+    {% else %}
+      {% for song in recoms %}
+        <li>{{song.title}}, {{song.artist}}</li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+  <p><a href="/homepage">refresh your recommendations</a></p>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+  <p><a href="/">index</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <p><a href="{% url 'signup' %}">Sign Up</a></p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

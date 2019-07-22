@@ -121,3 +121,17 @@ def songs(request):
 	songlist = Song.objects.all().order_by('title')
 	context = {'songs':songlist}
 	return render(request, 'recommend/songs.html', context)
+
+@login_required()
+def home(request):
+	if request.user.is_authenticated:
+		songs = request.user.songs.all()
+		ratings = Ratings.objects.filter(person=request.user).order_by('song_id')
+		recommended = request.user.newsongs.all().order_by('title')
+		context = {
+		'songs':songs,
+		'recoms':recommended,
+		'ratings':ratings
+		}
+		return render(request, 'recommend/home.html', context)
+	return render(request, 'recommend/home.html')
