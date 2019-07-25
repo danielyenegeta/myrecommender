@@ -2,6 +2,7 @@ from django.shortcuts import render
 from recommend.models import Song, CustomUser, Ratings, Scores
 from recommend.views import matrix_factorization
 from django.contrib.auth.decorators import login_required
+from .forms import AddSongForm
 import numpy
 
 # Create your views here.
@@ -84,3 +85,11 @@ def newsongs(request):
 		}
 		return render(request, 'frontend/home.html', context)
 	return render(request, 'frontend/home.html')
+
+@login_required()
+def addsong(request):
+    if request.method == "POST":
+        form = AddSongForm(request.POST)
+    else:
+        form = AddSongForm()
+    return render(request, '/home', {'form':form})

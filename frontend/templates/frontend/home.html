@@ -23,6 +23,9 @@
         {% else %}
           {% for song in songs %}
             <li>{{song.title}}, {{song.artist}}</li>
+            <button onclick="location.href='/songview/{{song.id}}';" >Practice song</button>
+            <button>Remove song</button>
+            <button>Rate song</button>
           {% endfor %}
         {% endif %}
       </ul>
