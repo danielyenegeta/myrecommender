@@ -52,7 +52,8 @@
         {% endif %}
       </ul>
 
-      <p><a href="/home/new">refresh your recommendations</a></p>
+      <!-- <p><a href="/home/new">refresh your recommendations</a></p> -->
+      <p><a href="{% url 'newhome' %}">refresh your recommendations</a></p>
     {% else %}
       <p>You are not logged in</p>
       <p><a href="{% url 'signup' %}">Sign Up</a></p>

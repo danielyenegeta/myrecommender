@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from recommend.models import Song, CustomUser, Ratings, Scores
 from recommend.views import matrix_factorization
 from django.contrib.auth.decorators import login_required
@@ -87,9 +87,23 @@ def newsongs(request):
 	return render(request, 'frontend/home.html')
 
 @login_required()
-def addsong(request):
-    if request.method == "POST":
-        form = AddSongForm(request.POST)
+def addsong(request, songnumber):
+    if request.user.is_authenticated:
+        user = request.user
+        songs = user.songs.all()
+        allsongs = Song.objects.all()
+        user.songs.add(allsongs.get(id=songnumber))
+
+        recommended = request.user.newsongs.all().order_by('title')
+        ratings = Ratings.objects.filter(person=user).order_by('song_id')
+
+        # context = {
+        # 'songs':songs,
+        # 'recoms':recommended,
+        # 'ratings':ratings
+        # }
+        response = redirect('/home')
+
+        return response
     else:
-        form = AddSongForm()
-    return render(request, '/home', {'form':form})
+        return render(request, 'frontend/home.html')

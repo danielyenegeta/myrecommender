@@ -18,9 +18,7 @@
       {% for song in songs %}
         <li>{{song.title}}, {{song.artist}}</li>
         <button onclick="location.href='/songview/{{song.id}}';" >Practice song</button>
-        <form method="POST" class="add-song-form">{% csrf_token %}
-          <button type="submit">Add Song</button>
-        </form>
+        <a href="/home/{{song.id}}"<button type="button">Add Song</button></a>
         <button>Rate song</button>
       {% endfor %}
       </ul>
