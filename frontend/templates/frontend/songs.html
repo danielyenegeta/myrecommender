@@ -18,7 +18,7 @@
       {% for song in songs %}
         <li>{{song.title}}, {{song.artist}}</li>
         <button onclick="location.href='/songview/{{song.id}}';" >Practice song</button>
-        <a href="/home/{{song.id}}"<button type="button">Add Song</button></a>
+        <button type="button">Add Song</button>
         <button>Rate song</button>
       {% endfor %}
       </ul>

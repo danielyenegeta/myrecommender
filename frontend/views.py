@@ -85,25 +85,3 @@ def newsongs(request):
 		}
 		return render(request, 'frontend/home.html', context)
 	return render(request, 'frontend/home.html')
-
-@login_required()
-def addsong(request, songnumber):
-    if request.user.is_authenticated:
-        user = request.user
-        songs = user.songs.all()
-        allsongs = Song.objects.all()
-        user.songs.add(allsongs.get(id=songnumber))
-
-        recommended = request.user.newsongs.all().order_by('title')
-        ratings = Ratings.objects.filter(person=user).order_by('song_id')
-
-        # context = {
-        # 'songs':songs,
-        # 'recoms':recommended,
-        # 'ratings':ratings
-        # }
-        response = redirect('/home')
-
-        return response
-    else:
-        return render(request, 'frontend/home.html')
