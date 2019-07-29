@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from recommend.models import Song, CustomUser, Ratings, Scores
 from recommend.views import matrix_factorization
 from django.contrib.auth.decorators import login_required
@@ -85,3 +86,11 @@ def newsongs(request):
 		}
 		return render(request, 'frontend/home.html', context)
 	return render(request, 'frontend/home.html')
+
+@login_required
+def addsong(request):
+    if request.method == 'POST':
+        songid = request.POST['id']
+        toAdd = Song.objects.get(id=songid)
+        request.user.songs.add(toAdd)
+        return HttpResponse('')
