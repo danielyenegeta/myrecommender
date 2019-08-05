@@ -100,7 +100,7 @@ def addsong(request):
 
     else:
         addform = AddSongForm()
-        songs = Song.objects.all()
+        songs = request.user.newsongs.all()
         context = {
         'addform':addform,
         'songs':songs
@@ -120,7 +120,7 @@ def removesong(request):
 
     else:
         removeform = RemoveSongForm()
-        songs = Song.objects.all()
+        songs = request.user.songs.all()
         context = {
         'removeform':removeform,
         'songs':songs
