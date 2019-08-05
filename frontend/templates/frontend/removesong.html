@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Piano Song Recommender</title>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div id="app" class="columns"><!-- React --></div>
+    </div>
+  </section>
+  <section>
+    <form method="POST">{% csrf_token %}
+      {{ removeform.as_p }}
+      <button type="submit">Remove</button>
+    </form>
+  </section>
+  <br>
+  <br>
+  <h2>All Songs</h2>
+  <section>
+    {% if songs %}
+    <ul>
+      {% for song in songs %}
+        <li>{{song.title}}, {{song.artist}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+</body>
+{% load static %}
+<script src="{% static "frontend/main.js" %}"></script>
+</html>

@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from recommend.models import Song, CustomUser, Ratings, Scores
 from recommend.views import matrix_factorization
 from django.contrib.auth.decorators import login_required
-from .forms import AddSongForm
+from .forms import AddSongForm, RemoveSongForm
 import numpy
 
 # Create your views here.
@@ -89,8 +89,40 @@ def newsongs(request):
 
 @login_required
 def addsong(request):
-    if request.method == 'POST':
-        songid = request.POST['id']
-        toAdd = Song.objects.get(id=songid)
-        request.user.songs.add(toAdd)
-        return HttpResponse('')
+    if request.method == "POST":
+        form = AddSongForm(request.POST)
+        if form.is_valid():
+            song_title = form.cleaned_data['title']
+            song_artist = form.cleaned_data['artist']
+            song = Song.objects.get(title=song_title, artist=song_artist)
+            request.user.songs.add(song)
+            return redirect('/addsong')
+
+    else:
+        addform = AddSongForm()
+        songs = Song.objects.all()
+        context = {
+        'addform':addform,
+        'songs':songs
+        }
+        return render(request, 'frontend/addsong.html', context)
+
+@login_required
+def removesong(request):
+    if request.method == "POST":
+        form = RemoveSongForm(request.POST)
+        if form.is_valid():
+            song_title = form.cleaned_data['title']
+            song_artist = form.cleaned_data['artist']
+            song = Song.objects.get(title=song_title, artist=song_artist)
+            request.user.songs.remove(song)
+            return redirect('/removesong')
+
+    else:
+        removeform = RemoveSongForm()
+        songs = Song.objects.all()
+        context = {
+        'removeform':removeform,
+        'songs':songs
+        }
+        return render(request, 'frontend/removesong.html', context)

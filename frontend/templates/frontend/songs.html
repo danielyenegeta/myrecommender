@@ -13,21 +13,15 @@
           <div id="app" class="columns"><!-- React --></div>
     </div>
   </section>
+  <br>
+  <br>
+  <br>
+  <br>
   <section>
-    {% if songs %}
-      <ul>
-      {% for song in songs %}
-        <li>{{song.title}}, {{song.artist}}</li>
-        <button data-songid={{song.id}} id="addsong" onclick="location.href='/songview/{{song.id}}';" >Practice song</button>
-        <form id="add_song_form">{% csrf_token %}
-            <button type="submit">Add Song</button>
-        </form>
-        <button>Rate song</button>
-      {% endfor %}
-      </ul>
-    {% else %}
-      <p>No songs available</p>
-    {% endif %}
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Song</button>
+    </form>
   </section>
 </body>
 {% load static %}
@@ -37,6 +31,9 @@
 
     $(document).on('submit','#add_song_form',function(e) {
         e.preventDefault();
+
+        var csrf = $('input[name="csrfmiddlewaretoken"]').val();
+        var song_id = $(this).parent().find('data-songid').value;
 
         $.ajaxSetup({
      beforeSend: function(xhr, settings) {
@@ -62,12 +59,13 @@
      }
 });
 
+        // id:$('#addsong').attr('data-songid'),
         $.ajax({
             type:'POST',
             url:'/addsong/',
             data:{
-                id:$('#addsong').attr('data-songid'),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                id:song_id,
+                csrfmiddlewaretoken:csrf
             },
             success:function(){
                 alert("Song added!");

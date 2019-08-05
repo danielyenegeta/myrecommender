@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .models import Song, CustomUser, Ratings, Scores
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, AddSongForm
 from django.contrib.auth.decorators import login_required
 from .serializers import SongSerializer
 from rest_framework import generics
@@ -135,3 +135,9 @@ def home(request):
 		}
 		return render(request, 'recommend/home.html', context)
 	return render(request, 'recommend/home.html')
+
+@login_required
+def addsong(request):
+	form = AddSongForm()
+	context = {'form':form}
+	return render(request, 'recommend/addsong.html', context)

@@ -12,5 +12,6 @@ urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
     path('home/', views.home, name='home'),
     path('signup/', views.signup.as_view(), name='signup'),
+    path('addsong/', views.addsong, name='addsong'),
 ]
 # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
