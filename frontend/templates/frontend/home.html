@@ -25,7 +25,7 @@
             <li>{{song.title}}, {{song.artist}}</li>
             <button onclick="location.href='/songview/{{song.id}}';" >Practice song</button>
             <button onclick="location.href='/removesong';">Remove song</button>
-            <button>Rate song</button>
+            <button onclick="location.href='/rate';">Rate song</button>
           {% endfor %}
         {% endif %}
       </ul>

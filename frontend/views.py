@@ -100,9 +100,11 @@ def addsong(request):
 
     else:
         addform = AddSongForm()
-        songs = request.user.newsongs.all()
+        usersongs = request.user.newsongs.all()
+        songs = Song.objects.all()
         context = {
         'addform':addform,
+        'usersongs':usersongs,
         'songs':songs
         }
         return render(request, 'frontend/addsong.html', context)
@@ -143,7 +145,7 @@ def rate(request):
                     toEdit.delete()
                 else:
                     toEdit.update(rating=currrating)
-            elif currating != 0:
+            elif currrating != 0:
                 rate = Ratings.objects.create(person=request.user, song=toRate, rating=currrating)
             return redirect('/rate')
     else:

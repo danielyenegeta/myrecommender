@@ -23,12 +23,26 @@
   <br>
   <h2>Your Recommended Songs</h2>
   <section>
+    {% if usersongs %}
+    <ul>
+      {% for song in usersongs %}
+        <li>{{song.title}}, {{song.artist}}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>No songs :(</p>
+    {% endif %}
+  </section>
+  <h2>All Songs</h2>
+  <section>
     {% if songs %}
     <ul>
       {% for song in songs %}
         <li>{{song.title}}, {{song.artist}}</li>
       {% endfor %}
     </ul>
+    {% else %}
+      <p>No songs :(</p>
     {% endif %}
   </section>
 </body>
