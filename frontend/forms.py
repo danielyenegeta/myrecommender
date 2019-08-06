@@ -14,8 +14,7 @@ class RemoveSongForm(forms.ModelForm):
         model = Song
         fields = ('title', 'artist')
 
-class RateSongForm(forms.ModelForm):
-
-    class Meta:
-        model = Ratings
-        fields = ('person', 'rating',)
+class RateSongForm(forms.Form):
+    song = forms.CharField(max_length=50)
+    artist = forms.CharField(max_length=50)
+    rating = forms.IntegerField(min_value=0, max_value=5)

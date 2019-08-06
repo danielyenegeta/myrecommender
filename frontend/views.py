@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from recommend.models import Song, CustomUser, Ratings, Scores
 from recommend.views import matrix_factorization
 from django.contrib.auth.decorators import login_required
-from .forms import AddSongForm, RemoveSongForm
+from .forms import AddSongForm, RemoveSongForm, RateSongForm
 import numpy
 
 # Create your views here.
@@ -126,3 +126,31 @@ def removesong(request):
         'songs':songs
         }
         return render(request, 'frontend/removesong.html', context)
+
+@login_required
+def rate(request):
+    if request.method == "POST":
+        form = RateSongForm(request.POST)
+        if form.is_valid():
+            ratings = Ratings.objects.filter(person=request.user)
+            currsong = form.cleaned_data['song']
+            currartist = form.cleaned_data['artist']
+            currrating = form.cleaned_data['rating']
+            toRate = Song.objects.get(title=currsong, artist=currartist)
+            if ratings.filter(song_id=toRate.id).exists():
+                toEdit = ratings.get(song_id=toRate.id)
+                if currrating == 0:
+                    toEdit.delete()
+                else:
+                    toEdit.update(rating=currrating)
+            elif currating != 0:
+                rate = Ratings.objects.create(person=request.user, song=toRate, rating=currrating)
+            return redirect('/rate')
+    else:
+        form = RateSongForm()
+        songs = Song.objects.all()
+        context = {
+        'form':form,
+        'songs':songs
+        }
+        return render(request, 'frontend/rate.html', context)

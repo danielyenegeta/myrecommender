@@ -13,6 +13,7 @@ const toolbar = props => (
         <ul>
           <li><a href="/addsong">Add</a></li>
           <li><a href="/removesong">Remove</a></li>
+          <li><a href="/rate">Rate</a></li>
           <li><a href="/home">Homepage</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>

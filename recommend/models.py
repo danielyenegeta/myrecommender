@@ -18,8 +18,8 @@ class CustomUser(AbstractUser):
         return self.email
 
 class Ratings(models.Model):
-    person = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    person = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
+    song = models.ForeignKey(Song, on_delete=models.PROTECT)
     rating = models.PositiveIntegerField(default=0, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
 class Scores(models.Model):
