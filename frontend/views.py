@@ -16,7 +16,6 @@ def songs(request):
 	context = {'songs':songlist}
 	return render(request, 'frontend/songs.html', context)
 
-@login_required()
 def home(request):
 	if request.user.is_authenticated:
 		songs = request.user.songs.all()
