@@ -100,8 +100,8 @@ def addsong(request):
 
     else:
         addform = AddSongForm()
-        usersongs = request.user.newsongs.all()
-        songs = Song.objects.all()
+        usersongs = request.user.newsongs.all().order_by('title')
+        songs = Song.objects.all().order_by('title')
         context = {
         'addform':addform,
         'usersongs':usersongs,
@@ -122,7 +122,7 @@ def removesong(request):
 
     else:
         removeform = RemoveSongForm()
-        songs = request.user.songs.all()
+        songs = request.user.songs.all().order_by('title')
         context = {
         'removeform':removeform,
         'songs':songs
@@ -140,7 +140,7 @@ def rate(request):
             currrating = form.cleaned_data['rating']
             toRate = Song.objects.get(title=currsong, artist=currartist)
             if ratings.filter(song_id=toRate.id).exists():
-                toEdit = ratings.get(song_id=toRate.id)
+                toEdit = ratings.filter(song_id=toRate.id)
                 if currrating == 0:
                     toEdit.delete()
                 else:
@@ -150,7 +150,7 @@ def rate(request):
             return redirect('/rate')
     else:
         form = RateSongForm()
-        songs = Song.objects.all()
+        songs = Song.objects.all().order_by('title')
         context = {
         'form':form,
         'songs':songs
