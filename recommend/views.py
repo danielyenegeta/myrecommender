@@ -106,16 +106,6 @@ def homepage(request):
 def index(request):
     return render(request, 'recommend/index.html')
 
-def songview(request, songnumber):
-	if Scores.objects.filter(song_id=songnumber).exists():
-		sheetmusic = Scores.objects.get(song_id=songnumber).pdf
-		response = HttpResponse(sheetmusic.read(), content_type='application/pdf')
-		response['Content-Disposition'] = 'inline;filename=some_file.pdf'
-		return response
-		sheetmusic.close()
-	else:
-		return render(request, 'recommend/songview.html')
-
 @login_required()
 def songs(request):
 	songlist = Song.objects.all().order_by('title')

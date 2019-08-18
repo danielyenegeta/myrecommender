@@ -155,3 +155,13 @@ def rate(request):
         'songs':songs
         }
         return render(request, 'frontend/rate.html', context)
+
+def songview(request, songnumber):
+	if Scores.objects.filter(song_id=songnumber).exists():
+		sheetmusic = Scores.objects.get(song_id=songnumber).pdf
+		response = HttpResponse(sheetmusic.read(), content_type='application/pdf')
+		response['Content-Disposition'] = 'inline;filename=some_file.pdf'
+		return response
+		sheetmusic.close()
+	else:
+		return render(request, 'recommend/songview.html')

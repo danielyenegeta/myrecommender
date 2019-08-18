@@ -8,5 +8,6 @@ urlpatterns = [
     path('home/new', views.newsongs, name="newhome"),
     path('addsong/', views.addsong, name="addsong"),
     path('removesong/', views.removesong, name="removesong"),
+    path('songview/<int:songnumber>/', views.songview, name='songview'),
     path('rate/', views.rate, name="rate")
 ]
