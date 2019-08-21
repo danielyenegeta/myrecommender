@@ -25,7 +25,7 @@ SECRET_KEY = '#1iyut*5)6&-@qe@jk82t$9+ks!k))gt9n9!k0q62j)4r5d2x6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pianosongs.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
