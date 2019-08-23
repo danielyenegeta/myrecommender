@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
-from .models import CustomUser
+from recommend.models import CustomUser
 
 
 class Command(BaseCommand):
