@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +28,7 @@ SECRET_KEY = '#1iyut*5)6&-@qe@jk82t$9+ks!k))gt9n9!k0q62j)4r5d2x6'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     'localhost',
     '127.0.0.1',
     'pianosongs.us-east-1.elasticbeanstalk.com',
@@ -118,6 +121,9 @@ else:
         }
     }
 
+prod_db  =  dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(prod_db)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -173,6 +179,4 @@ LOGOUT_REDIRECT_URL = '/home/'
 MEDIA_URL = '/recommend/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'recommend')
 
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+django_heroku.settings(locals())
