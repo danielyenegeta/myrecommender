@@ -25,7 +25,13 @@ SECRET_KEY = '#1iyut*5)6&-@qe@jk82t$9+ks!k))gt9n9!k0q62j)4r5d2x6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pianosongs.us-east-1.elasticbeanstalk.com', '172.31.35.107']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'pianosongs.us-east-1.elasticbeanstalk.com',
+    '172.31.35.107',
+    'myrecommender.herokuapp.com',
+]
 
 
 # Application definition
@@ -51,9 +57,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'frontend',
+    'herokuapp',
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,8 +155,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "frontend", "static", "frontend")
+# PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'www')
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'recommend.CustomUser'
 
@@ -157,3 +172,7 @@ LOGOUT_REDIRECT_URL = '/home/'
 
 MEDIA_URL = '/recommend/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'recommend')
+
+import dj_database_url
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
