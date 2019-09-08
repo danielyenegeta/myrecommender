@@ -127,8 +127,8 @@ DATABASES = {
         'NAME': config(DB_NAME),
         'USER': config(DB_USER),
         'PASSWORD': config(DB_PASS),
-        'HOST': config(DB_HOST)
-        'PORT':
+        'HOST': config(DB_HOST),
+        'PORT': 5432,
     }
 }
 # DATABASES = {}
