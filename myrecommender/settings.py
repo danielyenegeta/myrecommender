@@ -122,16 +122,30 @@ WSGI_APPLICATION = 'myrecommender.wsgi.application'
 #         }
 #     }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config(DB_NAME),
+#         'USER': config(DB_USER),
+#         'PASSWORD': config(DB_PASS),
+#         'HOST': config(DB_HOST),
+#         'PORT': '',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config(DB_NAME),
-        'USER': config(DB_USER),
-        'PASSWORD': config(DB_PASS),
-        'HOST': config(DB_HOST),
-        'PORT': '',
+        'NAME': os.environ.get('DB_NAME', ''),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASS', ''),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 # DATABASES = {}
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
