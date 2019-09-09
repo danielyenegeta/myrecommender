@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = '1iyut*5)6&-@qe@jk82t$9+ks!k))gt9n9!k0q62j)4r5d2x6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,10 +142,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 # DATABASES = {}
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
