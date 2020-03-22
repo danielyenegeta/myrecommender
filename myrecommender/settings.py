@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [
     'pianosongs.us-east-1.elasticbeanstalk.com',
     '172.31.35.107',
     'myrecommender.herokuapp.com',
+    'aqueous-dusk-29066.herokuapp.com',
 ]
 
 
@@ -145,8 +146,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 # PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
