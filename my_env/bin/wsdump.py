@@ -1,4 +1,4 @@
-#!/Users/danielyenegeta/Desktop/CS/myrecommender/my_env/bin/python3.7
+#!/Users/danielyenegeta/Desktop/CS/myrecommender/my_env/bin/python3
 
 import argparse
 import code

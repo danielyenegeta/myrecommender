@@ -1,10 +1,12 @@
-#!/Users/danielyenegeta/Desktop/CS/myrecommender/my_env/bin/python3.7
-# -*- coding: utf-8 -*-
+#!/Users/danielyenegeta/Desktop/CS/myrecommender/my_env/bin/python3
+# EASY-INSTALL-ENTRY-SCRIPT: 'awsebcli==3.15.3','console_scripts','eb'
+__requires__ = 'awsebcli==3.15.3'
 import re
 import sys
-
-from ebcli.core.ebcore import main
+from pkg_resources import load_entry_point
 
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
-    sys.exit(main())
+    sys.exit(
+        load_entry_point('awsebcli==3.15.3', 'console_scripts', 'eb')()
+    )
