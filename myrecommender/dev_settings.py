@@ -7,6 +7,6 @@ try:
 except ImportError:
     pass
 
-DEBUG = False
+#DEBUG = False
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
