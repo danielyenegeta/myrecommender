@@ -31,10 +31,8 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     'localhost',
     '127.0.0.1',
-    'pianosongs.us-east-1.elasticbeanstalk.com',
     '172.31.35.107',
-    'myrecommender.herokuapp.com',
-    'aqueous-dusk-29066.herokuapp.com',
+    'desolate-beyond-37454.herokuapp.com',
 ]
 
 
