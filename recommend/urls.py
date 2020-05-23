@@ -5,12 +5,16 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('api/song/', views.SongListCreate.as_view() ),
-    path('songs/', views.songs, name='songs'),
-    path('homepage/', views.homepage, name='homepage'),
-    path('home/', views.home, name='home'),
+    path('', views.index ),
+    path('songs/', views.songs, name="songs"),
+    path('home/', views.home, name="home"),
+    path('home/new', views.newsongs, name="newhome"),
+    path('addsong/', views.addsong, name="addsong"),
+    path('removesong/', views.removesong, name="removesong"),
+    path('songview/<int:songnumber>/', views.songview, name='songview'),
+    path('rate/', views.rate, name="rate"),
     path('signup/', views.signup.as_view(), name='signup'),
-    path('addsong/', views.addsong, name='addsong'),
+    path('api/song/', views.SongListCreate.as_view() ),
+    path('homepage/', views.homepage, name='homepage'),
 ]
 # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
