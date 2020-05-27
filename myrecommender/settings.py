@@ -51,6 +51,7 @@ REST_FRAMEWORK = {
 
 INSTALLED_APPS = [
     'recommend.apps.RecommendConfig',
+    'frontend.apps.FrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +59,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'frontend',
     'herokuapp',
 ]
 
@@ -157,7 +157,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AUTH_USER_MODEL = 'recommend.CustomUser'
 
 LOGIN_REDIRECT_URL = '/home/'
-LOGOUT_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 MEDIA_URL = '/recommend/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'recommend')

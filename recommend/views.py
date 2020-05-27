@@ -19,6 +19,7 @@ class SongListCreate(generics.ListCreateAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
 
+@login_required
 def index(request):
     return render(request, 'frontend/index.html')
 
@@ -28,6 +29,7 @@ def songs(request):
 	context = {'songs':songlist}
 	return render(request, 'frontend/songs.html', context)
 
+@login_required
 def home(request):
 	if request.user.is_authenticated:
 		songs = request.user.songs.all()
@@ -168,6 +170,7 @@ def rate(request):
         }
         return render(request, 'frontend/rate.html', context)
 
+@login_required
 def songview(request, songnumber):
 	if Scores.objects.filter(song_id=songnumber).exists():
 		sheetmusic = Scores.objects.get(song_id=songnumber).pdf
@@ -176,7 +179,7 @@ def songview(request, songnumber):
 		return response
 		sheetmusic.close()
 	else:
-		return render(request, 'recommend/songview.html')
+		return render(request, 'frontend/songview.html')
 
 
 def matrix_factorization(R, P, Q, K, alpha=0.0002, beta=0.02, steps=10000):
@@ -201,6 +204,7 @@ def matrix_factorization(R, P, Q, K, alpha=0.0002, beta=0.02, steps=10000):
 			break
 	return P, Q.T
 
+@login_required
 def homepage(request):
 	if request.user.is_authenticated:
 		songs = request.user.songs.all()
@@ -259,3 +263,6 @@ def homepage(request):
 		}
 		return render(request, 'recommend/homepage.html', context)
 	return render(request, 'recommend/homepage.html')
+
+def login(request):
+	return redirect('/login')

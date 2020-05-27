@@ -25,7 +25,6 @@ urlpatterns = [
     path('', include('recommend.urls')),
     path('', include('django.contrib.auth.urls')),
     path('recommend/', include('recommend.urls')),
-    path('accounts/login/', auth_views.LoginView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]
