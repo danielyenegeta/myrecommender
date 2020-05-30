@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="{% static 'frontend/login.css' %}">
+  <link rel="stylesheet" href="{% static 'frontend/signup.css' %}">
   <link rel="shortcut icon" href="{% static 'frontend/favicon.ico' %}" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -16,10 +16,12 @@ integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0J
 </head>
 <div class="container">
   <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+  <div id="signupform">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Sign up</button>
+    </form>
+  </div>
 </div>
 </html>
