@@ -33,10 +33,12 @@ def songs(request):
 def home(request):
 	if request.user.is_authenticated:
 		songs = request.user.songs.all()
+		#last_practiced = request.user.songs.through.objects.filter(customuser_id=request.user.id)
 		ratings = Ratings.objects.filter(person=request.user).order_by('song_id')
 		recommended = request.user.newsongs.all().order_by('title')
 		context = {
 		'songs':songs,
+		#'last_practiced':last_practiced,
 		'recoms':recommended,
 		'ratings':ratings
 		}

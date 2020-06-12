@@ -29,6 +29,9 @@
             <button onclick="location.href='/removesong';">Remove song</button>
             <button onclick="location.href='/rate';">Rate song</button>
           {% endfor %}
+          {% for song in last_practiced %}
+            <li>{{song}}</li>
+          {% endfor %}
         {% endif %}
       </ul>
 
