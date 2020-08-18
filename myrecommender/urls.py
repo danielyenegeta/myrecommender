@@ -22,9 +22,10 @@ from recommend.views import *
 
 
 urlpatterns = [
-    path('', include('recommend.urls')),
-    path('', include('django.contrib.auth.urls')),
+    path('admin/', admin.site.urls),
     path('recommend/', include('recommend.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('admin/', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('', include('recommend.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]

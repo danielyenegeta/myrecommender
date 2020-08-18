@@ -158,6 +158,7 @@ AUTH_USER_MODEL = 'recommend.CustomUser'
 
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/login/'
+APPEND_SLASH = True
 
 MEDIA_URL = '/recommend/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'recommend')

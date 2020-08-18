@@ -14,18 +14,26 @@ integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfoo
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" 
 integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
-<div class="container">
-  <h2>Welcome</h2>
-  <div id="loginform">
-    <br>
-    <form method="post">
+  <div class="container">
+    <h2>Welcome</h2>
+    <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Login</button>
+      <input id="username_input" name="username" type="text" placeholder="username" class="form-control">
+      <input id="password_input" name="password" type="password" placeholder="password" class="form-control">
+      <a href="#" id="forgot_password">Forgot password?</a>
+      <br>
+      <input id="login_button" type="submit" value="Login" class="btn btn-primary pull-right" />
+      <br>
+      {% if form.errors %}
+      <p class=" label label-danger">
+          Your username and password didn't match. 
+          Please try again.
+      </p>
+      {% endif %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <br>
+      <a href="/signup">Sign Up Here!</a>
     </form>
-    <br>
   </div>
-  <a href="/signup">Sign Up Here!</a>
-</div>
-
+  
 </html>

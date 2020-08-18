@@ -1,6 +1,26 @@
-#loginform {
-    text-align: center;
+#forgot_password {
+    float: right;
+}
+#username_input {
+    width: 500px;
+}
+#password_input {
+    float: center;
+    width: 500px;
+}
+#login_button {
+    width: 100px;
 }
 .container {
     text-align: center;
+    margin: auto;
+}
+form {
+    display: inline-block;
+}
+input[type=text] {
+    color: green;
+}
+input[type=submit] {
+    width: 100%;
 }
